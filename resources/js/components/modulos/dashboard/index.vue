@@ -1,6 +1,6 @@
 <template>
   <div class="content-wrapper" style="min-height: 453px;">
-    <!-- Content Header (Page header) -->
+    <!-- Content Header -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
