@@ -10,7 +10,7 @@ export default new VueRouter({
         {path: '/categoria', component: require('./components/modulos/categoria/index').default},
         {path: '/cliente', component: require('./components/modulos/cliente/index').default},
         {path: '/permiso', component: require('./components/modulos/permiso/index').default},
-        {path: '/producto', component: require('./components/modulos/producto/index').default},
+        {path: '/usuario', component: require('./components/modulos/usuario/index').default},
         {path: '/reporte', component: require('./components/modulos/reporte/index').default},
         {path: '/roles', component: require('./components/modulos/rol/index').default}
     ],

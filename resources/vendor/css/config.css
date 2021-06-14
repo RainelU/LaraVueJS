@@ -1,0 +1,15 @@
+.img-bandeja{
+    width: 40px;
+    list-style: none;
+    text-decoration: none;
+    border-radius: 50%;
+}
+
+.li-img-bandeja{
+    list-style: none;
+}
+
+.text-center{
+    width: 100%;
+    text-align: center;
+}
