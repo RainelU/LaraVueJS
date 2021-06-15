@@ -12,10 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('/administracion/usuario/setRegistrarUsuario', 'AdmUsersController@setRegistrarUsuarios');
+Route::get('/administracion/usuario/getUsuarios', 'AdmUsersController@getUsuarios');
+Route::post('/archivo/setRegistrarArchivo', 'FilesController@setRegistrarUsuarios');
 
 Route::get('/{optional?}', function () {
     return view('apps');
-})->name('basepath');
+})  ->name('basepath')
+    ->where('optional', '.*');
 
-
-Route::get('/administracion/usuario/getUsuarios', 'AdmUsersController@getUsuarios');

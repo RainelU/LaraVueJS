@@ -84,10 +84,10 @@
           </li>
           <li class="nav-header">REPORTES</li>
           <li class="nav-item">
-            <a class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
-              <p>Pedidos</p>
-            </a>
+            <router-link :to="'/reportes/pedido'" class="nav-link">
+                <i class="nav-icon fas fa-list"></i>
+                <p>Pedidos</p>
+            </router-link>
           </li>
         </ul>
       </nav>

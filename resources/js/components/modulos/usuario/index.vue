@@ -19,7 +19,7 @@
         <div class="card">
           <div class="card-header">
             <div class="card-tools">
-              <router-link class="btn btn-info btn-sm mb-5 mt-2" to="/">
+              <router-link class="btn btn-info btn-sm mb-5 mt-2" :to="'/usuario/crear'">
                 <i class="fas fa-plus"></i> Nuevo Usuario
               </router-link>
             </div>
@@ -37,7 +37,7 @@
                             
                             <label for="" class="col-md-4 col-form label" ><i class="fas fa-user fa-user-info col-md-1"></i> Nombre</label>
                             <div class="col-md-8">
-                              <input type="text" name="" v-model="fillBsqUsuario.nombre" class="form-control">
+                              <input type="text" name="" v-model="fillBsqUsuario.nombre" @keyup.enter="getUsuarios" class="form-control">
                             </div>
                           </div>
                         </div>
@@ -45,7 +45,7 @@
                           <div class="row form-group">
                             <label for="" class="col-md-4 col-form label"><i class="fas fa-user fa-user-info col-md-1"></i> Usuario</label>
                             <div class="col-md-8">
-                              <input type="text" name="" v-model="fillBsqUsuario.usuario" class="form-control">
+                              <input type="text" name="" v-model="fillBsqUsuario.usuario" @keyup.enter="getUsuarios" class="form-control">
                             </div>
                           </div>
                         </div>
@@ -53,7 +53,7 @@
                           <div class="row form-group">
                             <label for="" class="col-md-4 col-form label"><i class="fas fa-at fa-user-info col-md-1"></i> Correo</label>
                             <div class="col-md-8">
-                              <input type="text" name="" v-model="fillBsqUsuario.correo" class="form-control">
+                              <input type="text" name="" v-model="fillBsqUsuario.correo" @keyup.enter="getUsuarios" class="form-control">
                             </div>
                           </div>
                         </div>
@@ -61,7 +61,7 @@
                           <div class="row form-group">
                             <label for="" class="col-md-4 col-form label"><i class="fas fa-signal mr-1 fa-user-info col-md-1"></i> Estado</label>
                             <div class="col-md-8">
-                              <el-select class="w-100" v-model="fillBsqUsuario.estado" placeholder="Seleccionar Estado" clearable>
+                              <el-select class="w-100" v-model="fillBsqUsuario.estado" @keyup.enter="getUsuarios" placeholder="Seleccionar Estado" clearable>
                                 <el-option
                                   v-for="i in Estado"
                                   :key="i.value"
@@ -78,7 +78,7 @@
                   <div class="card-footer">
                     <div class="row">
                       <div class="col-md-4 offset-4 d-flex">
-                        <button class="btn btn-flat btn-outline-info w-100 mr-3" @click.prevent="getUsuarios">Buscar</button>
+                        <button class="btn btn-flat btn-outline-info w-100 mr-3" @click.prevent="getUsuarios" v-loading.fullscreen.lock="fullscreenLoading">Buscar</button>
                         <button @click.prevent="limpiarBusqueda" class="btn btn-flat btn-outline-dark w-100">Borrar</button>
                       </div>
                     </div>
@@ -124,11 +124,11 @@
                               </template>
                             </td>
                             <td>
-                              <router-link class="btn btn-primary btn-sm" to="/"><i class="fas fa-folder"> Ver</i></router-link>
-                              <router-link class="btn btn-info btn-sm" to="/"><i class="fas fa-pencil-alt"> Editar</i></router-link>
-                              <router-link class="btn btn-success btn-sm" to="/"><i class="fas fa-key"> Permiso</i></router-link>
-                              <router-link class="btn btn-danger btn-sm" to="/"><i class="fas fa-trash"> Desactivar</i></router-link>
-                              <router-link class="btn btn-success btn-sm" to="/"><i class="fas fa-check"> Activar</i></router-link>
+                              <router-link class="btn btn-primary btn-sm" :to="'/'"><i class="fas fa-folder"> Ver</i></router-link>
+                              <router-link class="btn btn-info btn-sm" :to="'/'"><i class="fas fa-pencil-alt"> Editar</i></router-link>
+                              <router-link class="btn btn-success btn-sm" :to="'/'"><i class="fas fa-key"> Permiso</i></router-link>
+                              <router-link class="btn btn-danger btn-sm" :to="'/'"><i class="fas fa-trash"> Desactivar</i></router-link>
+                              <router-link class="btn btn-success btn-sm" :to="'/'"><i class="fas fa-check"> Activar</i></router-link>
                             </td>
                           </tr>
                         </tbody>
@@ -175,7 +175,8 @@ export default {
         Usuario: [],
         Estado: [{value: 'A', label: 'Activo'}, {value: 'I', label: 'Inactivo'}],
         pageNumber: 0,
-        perPage: 5
+        perPage: 5,
+        fullscreenLoading: false
       }
     },
     computed:{
@@ -220,6 +221,7 @@ export default {
           this.Usuario = [];
         },
         getUsuarios(){
+          this.fullscreenLoading = true;
           var url = '/administracion/usuario/getUsuarios';
           axios.get(url, {
             params: {
@@ -229,7 +231,9 @@ export default {
               'estado': this.fillBsqUsuario.estado
             }
           }).then(response => {
+            this.inicializarPaginacion();
             this.Usuario = response.data;
+            this.fullscreenLoading = false;
           })
         },
         nextPage(){
@@ -240,6 +244,9 @@ export default {
         },
         selectPage(page){
           this.pageNumber = page;
+        },
+        inicializarPaginacion(){
+          this.pageNumber = 0;
         }
     }
 }
