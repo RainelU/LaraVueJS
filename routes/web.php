@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/administracion/usuario/setRegistrarUsuario', 'AdmUsersController@setRegistrarUsuarios');
 Route::get('/administracion/usuario/getUsuarios', 'AdmUsersController@getUsuarios');
 Route::post('/archivo/setRegistrarArchivo', 'FilesController@setRegistrarUsuarios');
+Route::post('/administracion/usuario/setEditarUsuario', 'AdmUsersController@setEditarUsuarios');
 
 Route::get('/{optional?}', function () {
     return view('apps');

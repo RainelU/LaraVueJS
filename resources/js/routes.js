@@ -14,7 +14,13 @@ export default new VueRouter({
 
         {path: '/usuario', component: require('./components/modulos/usuario/index').default},
         {path: '/usuario/crear', component: require('./components/modulos/usuario/create').default},
-
+        {
+            path: '/usuario/editar/:id', 
+            name: 'usuario.editar', 
+            component: require('./components/modulos/usuario/edit').default, 
+            props: true
+        },
+        
         {path: '/reporte', component: require('./components/modulos/reporte/index').default},
         {path: '/roles', component: require('./components/modulos/rol/index').default},
         {path: '/producto', component: require('./components/modulos/producto/index').default}
