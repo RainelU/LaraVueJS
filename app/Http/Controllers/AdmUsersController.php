@@ -109,4 +109,22 @@ class AdmUsersController extends Controller
                                                                             ]);
         return $response;   
     }
+
+    public function setCambiarEstadoUsuarios(Request $request){
+        if(!$request->ajax()){
+            return redirect('/');
+        }
+
+        $idUsuario = $request->idUsuario;
+        $estado = $request->estado;
+
+        $idUsuario = ($idUsuario == NULL) ? ($idUsuario = 0) : $idUsuario;
+        $estado = ($estado == NULL) ? ($estado = '') : $estado;
+
+        $response = DB::select('call sp_Usuario_setCambiarEstadoUsuarios (?, ?)',   [
+                                                                                        $idUsuario,
+                                                                                        $estado
+                                                                                    ]);
+        return $response; 
+    }
 }

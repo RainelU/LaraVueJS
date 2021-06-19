@@ -133,10 +133,10 @@
                               <template v-if="i.state == 'A'">
                                 <router-link class="btn btn-flat btn-info btn-sm" :to="{name: 'usuario.editar', params: {id: i.id}}"><i class="fas fa-pencil-alt"> Editar</i></router-link>
                                 <router-link class="btn btn-flat btn-success btn-sm" :to="'/'"><i class="fas fa-key"> Permiso</i></router-link>
-                                <router-link class="btn btn-flat btn-danger btn-sm" :to="'/'"><i class="fas fa-trash"> Desactivar</i></router-link>
+                                <button class="btn btn-flat btn-danger btn-sm" @click.prevent="setCambiarEstadoUsuario(1, i.id)"><i class="fas fa-trash"> Desactivar</i></button>
                               </template>
                               <template v-else>
-                                <router-link class="btn btn-flat btn-success btn-sm" :to="'/'"><i class="fas fa-check"> Activar</i></router-link>
+                                <button class="btn btn-flat btn-success btn-sm" @click.prevent="setCambiarEstadoUsuario(2, i.id)"><i class="fas fa-check"> Activar</i></button>
                               </template>
                             </td>
                           </tr>
@@ -256,6 +256,35 @@ export default {
         },
         inicializarPaginacion(){
           this.pageNumber = 0;
+        },
+        setCambiarEstadoUsuario(op, id){
+          Swal.fire({
+            title: '¿Estás seguro de ' + ((op == 1) ? 'desactivar' : 'activar') + ' el usuario?' ,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: ((op == 1) ? 'Sí, desactivar' : 'Sí, activar')
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.fullscreenLoading = true;
+              let url = "/administracion/usuario/setCambiarEstadoUsuario";
+
+              axios.post(url, {
+                'idUsuario': id,
+                'estado': (op == 1) ? 'I' : 'A'
+              }).then(response => {
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: (op == 1) ? 'Se ha Desactivado el Usuario' : 'Se ha Activado el Usuario',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+                this.getUsuarios();
+              })
+            }
+          })
         }
     }
 }

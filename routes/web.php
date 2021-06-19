@@ -16,6 +16,7 @@ Route::post('/administracion/usuario/setRegistrarUsuario', 'AdmUsersController@s
 Route::get('/administracion/usuario/getUsuarios', 'AdmUsersController@getUsuarios');
 Route::post('/archivo/setRegistrarArchivo', 'FilesController@setRegistrarUsuarios');
 Route::post('/administracion/usuario/setEditarUsuario', 'AdmUsersController@setEditarUsuarios');
+Route::post('/administracion/usuario/setCambiarEstadoUsuario', 'AdmUsersController@setCambiarEstadoUsuarios');
 
 Route::get('/{optional?}', function () {
     return view('apps');
