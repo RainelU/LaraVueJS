@@ -16,17 +16,6 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
       <div class="content container-fluid">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-tools">
-                    <router-link class="btn btn-info btn-sm mb-5 mt-2" :to="'/usuario'">
-                        <i class="fas fa-arrow-left"></i> Regresar
-                    </router-link>
-                </div>
-            </div>
-        </div>
-      </div>
-      <div class="content container-fluid">
         <div class="row">
             <div class="col-md-4">
             <!-- Profile Image -->
@@ -34,10 +23,10 @@
               <div class="card-body box-profile">
                 <div class="text-center">
                     <template v-if="!this.fillVerUsuario.rutaFotografia">
-                        <img class="profile-user-img img-fluid img-circle" src="/img/avatar.png" alt="User profile picture">
+                        <img class="profile-user-img img-fluid img-circle img-max-height" src="/img/avatar.png" alt="User profile picture">
                     </template>
                     <template v-else>
-                        <img :src="this.fillVerUsuario.rutaFotografia" class="profile-user-img img-fluid img-circle">
+                        <img :src="this.fillVerUsuario.rutaFotografia" class="img-max-height profile-user-img img-fluid img-circle">
                     </template>
                 </div>
 
@@ -76,8 +65,10 @@
             <div class="col-md-8">
             <div class="card">
               <div class="card-header p-2">
-                <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active">Settings</a></li>
+                <ul class="nav nav-pills position-reverse">
+                  <router-link class="btn btn-info btn-sm mb-2 mt-2" :to="'/usuario'">
+                    <i class="fas fa-arrow-left"></i> Regresar
+                  </router-link>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">

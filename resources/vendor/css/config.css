@@ -2,18 +2,15 @@
     border-radius: 50px !important;
 }
 
-.img-bandeja{
-    width: 40px;
-    list-style: none;
-    text-decoration: none;
-    border-radius: 50%;
-}
-
-.li-img-bandeja{
-    list-style: none;
-}
-
 .text-center{
     width: 100%;
     text-align: center;
+}
+
+.position-reverse{
+    flex-direction: row-reverse !important;
+}
+
+.img-max-height{
+    width: 130px !important;
 }
