@@ -1,3 +1,7 @@
+.br-50{
+    border-radius: 50px !important;
+}
+
 .img-bandeja{
     width: 40px;
     list-style: none;

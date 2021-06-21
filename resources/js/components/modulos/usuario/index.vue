@@ -129,7 +129,7 @@
                               </template>
                             </td>
                             <td>
-                              <router-link class="btn btn-flat btn-primary btn-sm" :to="'/'"><i class="fas fa-folder"> Ver</i></router-link>
+                              <router-link class="btn btn-flat btn-primary btn-sm" :to="{name: 'usuario.ver', params: {id: i.id}}"><i class="fas fa-folder"> Ver</i></router-link>
                               <template v-if="i.state == 'A'">
                                 <router-link class="btn btn-flat btn-info btn-sm" :to="{name: 'usuario.editar', params: {id: i.id}}"><i class="fas fa-pencil-alt"> Editar</i></router-link>
                                 <router-link class="btn btn-flat btn-success btn-sm" :to="'/'"><i class="fas fa-key"> Permiso</i></router-link>

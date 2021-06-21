@@ -20,6 +20,12 @@ export default new VueRouter({
             component: require('./components/modulos/usuario/edit').default, 
             props: true
         },
+        {
+            path: '/usuario/ver/:id',
+            name: 'usuario.ver',
+            component: require('./components/modulos/usuario/view').default,
+            props: true
+        },
         
         {path: '/reporte', component: require('./components/modulos/reporte/index').default},
         {path: '/roles', component: require('./components/modulos/rol/index').default},
