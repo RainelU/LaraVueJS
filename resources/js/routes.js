@@ -28,7 +28,10 @@ export default new VueRouter({
         },
         
         {path: '/reporte', component: require('./components/modulos/reporte/index').default},
+
         {path: '/roles', component: require('./components/modulos/rol/index').default},
+        {path: '/roles/crear', component: require('./components/modulos/rol/create').default},
+
         {path: '/producto', component: require('./components/modulos/producto/index').default}
     ],
     mode: 'history',

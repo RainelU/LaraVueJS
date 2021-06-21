@@ -19,7 +19,7 @@
         <div class="card">
           <div class="card-header">
             <div class="card-tools">
-              <router-link class="btn btn-info btn-sm mb-5 mt-2" :to="'/usuario/crear'">
+              <router-link class="btn btn-info btn-sm mb-5 mt-2" :to="'/roles/crear'">
                 <i class="fas fa-plus"></i> Nuevo Rol
               </router-link>
             </div>
@@ -45,7 +45,7 @@
                           <div class="row form-group">
                             <label for="" class="col-md-4 col-form label"><i class="fas fa-user fa-user-info col-md-1"></i> Url Amigable</label>
                             <div class="col-md-8">
-                              <input type="text" name="" v-model="fillBsqRol.url" @keyup.enter="getRoles" class="form-control">
+                              <input type="text" name="" v-model="fillBsqRol.slug" @keyup.enter="getRoles" class="form-control">
                             </div>
                           </div>
                         </div>
@@ -118,7 +118,7 @@ export default {
       return{
         fillBsqRol: {
           nombre: '',
-          url: ''
+          slug: ''
         },
         Roles: [],
         pageNumber: 0,
@@ -129,24 +129,24 @@ export default {
     computed:{
         //Obtener el número de páginas
         pageCount(){
-          let usuarioLength = this.Usuario.length,
+          let rolesLength = this.Roles.length,
               perPage = this.perPage;
               
-              return Math.ceil(usuarioLength / perPage);
+              return Math.ceil(rolesLength / perPage);
         },
         //Obtener registros paginados
         listarRolesPaginated(){
           let inicio = this.pageNumber * this.perPage;
           let fin = inicio + this.perPage;
 
-          return this.Usuario.slice(inicio, fin);
+          return this.Roles.slice(inicio, fin);
         },
         //
         pageList(){
-          let usuarioLength = this.Usuario.length,
+          let rolesLength = this.Roles.length,
               perPage = this.perPage;
               
-          let pageCount = Math.ceil(usuarioLength / perPage);
+          let pageCount = Math.ceil(rolesLength / perPage);
           let count = 0,
               pagesArray = [];
 
@@ -160,9 +160,9 @@ export default {
     methods: {
         limpiarBusqueda(){
           this.fillBsqRol.nombre = '';
-          this.fillBsqRol.url = '';
+          this.fillBsqRol.slug = '';
         },
-        limpiarUsuarios(){
+        limpiarRoles(){
           this.Roles = [];
         },
         getRoles(){
@@ -171,7 +171,7 @@ export default {
           axios.get(url, {
             params: {
               'nombre': this.fillBsqRol.nombre,
-              'url': this.fillBsqRol.url,
+              'slug': this.fillBsqRol.slug
             }
           }).then(response => {
             this.inicializarPaginacion();
