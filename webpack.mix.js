@@ -14,8 +14,8 @@ const mix = require('laravel-mix');
  mix.styles([
     'resources/vendor/css/adminlte.min.css',
     'resources/vendor/css/all.min.css',
-    'resources/vendor/css/config.css',
-    'resources/vendor/css/font-awesome.min.css'
+    'resources/vendor/css/font-awesome.min.css',
+    'resources/vendor/css/config.css'
 ], 'public/css/plantilla.css')
     .js('resources/js/app.js', 'public/js')
     .scripts([

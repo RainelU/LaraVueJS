@@ -80,25 +80,27 @@
                                 </div>
                                 <div class="card-body table-responsive">
                                     <div v-if="PermisosFilter.length">
-                                        <table class="table table-hover table-head-fixed text-nowrap projects">
-                                            <thead>
-                                            <tr>
-                                                <th>Acción</th>
-                                                <th>Nombres</th>
-                                                <th>Url Amigable</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr v-for="(i, index) in PermisosFilter" :key="index" @click.prevent="marcarFila(index)">
-                                                <td>
-                                                    <!-- Irá el Checkbox Para Seleccionar los permisos que se le asignaran al rol -->
-                                                    <el-checkbox v-model="i.checked"></el-checkbox>
-                                                </td>
-                                                <td v-text="i.name"></td>
-                                                <td v-text="i.slug"></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="ScrollTable">
+                                            <table class="table table-hover table-head-fixed text-nowrap projects">
+                                                <thead>
+                                                <tr>
+                                                    <th>Acción</th>
+                                                    <th>Nombres</th>
+                                                    <th>Url Amigable</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr v-for="(i, index) in PermisosFilter" :key="index" @click.prevent="marcarFila(index)">
+                                                    <td>
+                                                        <!-- Irá el Checkbox Para Seleccionar los permisos que se le asignaran al rol -->
+                                                        <el-checkbox v-model="i.checked"></el-checkbox>
+                                                    </td>
+                                                    <td v-text="i.name"></td>
+                                                    <td v-text="i.slug"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                     <div v-else>
                                         <div class="callout callout-info text-center">No se han encontrado Resultados...</div>

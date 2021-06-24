@@ -14,3 +14,10 @@
 .img-max-height{
     width: 130px !important;
 }
+.modal-dialog{
+    overflow-y: initial !important
+}
+.ScrollTable{
+    max-height: 400px !important;
+    overflow: auto !important;
+  }
