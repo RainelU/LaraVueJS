@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Crear Roles</h1>
+            <h1 class="m-0 text-dark">Editar Roles</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -30,7 +30,7 @@
                         <div class="col-md-5">
                             <div class="card card-info w-100">
                                 <div class="card-header">
-                                    <h3 class="card-title">Formulario Registrar Roles</h3>
+                                    <h3 class="card-title">Formulario Editar Roles</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="container-fluid">
@@ -41,7 +41,7 @@
                                                         <div class="row form-group">      
                                                         <label for="" class="col-md-5 col-form label" ><i class="fas fa-user fa-user-info col-md-1"></i> Nombre</label>
                                                         <div class="col-md-7">
-                                                            <input type="text" name="" v-model="fillCrearRol.nombre" @keyup.enter="setRegistrarRolPermisos" class="form-control">
+                                                            <input type="text" name="" v-model="fillEditarRol.nombre" @keyup.enter="setEditarRolPermisos" class="form-control">
                                                         </div>
                                                         </div>
                                                     </div>
@@ -52,7 +52,7 @@
                                                             Url Amigable
                                                         </label>
                                                         <div class="col-md-7">
-                                                            <input type="text" name="" v-model="fillCrearRol.slug" @keyup.enter="setRegistrarRolPermisos" class="form-control">
+                                                            <input type="text" name="" v-model="fillEditarRol.slug" @keyup.enter="setEditarRolPermisos" class="form-control">
                                                         </div>
                                                         </div>
                                                     </div>
@@ -64,7 +64,7 @@
                                 <div class="card-footer">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button class="btn btn-flat btn-primary w-100 mr-3" @click.prevent="setRegistrarRolPermisos" v-loading.fullscreen.lock="fullscreenLoading">Registrar</button>
+                                        <button class="btn btn-flat btn-primary w-100 mr-3" @click.prevent="setEditarRolPermisos" v-loading.fullscreen.lock="fullscreenLoading">Editar</button>
                                     </div>
                                     <div class="col-md-6">
                                        <button @click.prevent="limpiarBusqueda" class="btn btn-flat btn-danger w-100">Borrar</button>
@@ -137,7 +137,8 @@
 export default {
     data(){
         return{
-            fillCrearRol: {
+            fillEditarRol: {
+                idRol: this.$attrs.id,
                 nombre: '',
                 slug: ''
             },
@@ -160,6 +161,7 @@ export default {
 
     },
     mounted(){
+        this.getRoles();
         this.getListarPermisosByRol();
     },
     methods: {
@@ -168,10 +170,27 @@ export default {
         },
         getListarPermisosByRol(){
             let url = "/administracion/rol/getListarPermisosByRol"
-            axios.get(url).then(response => { 
+            axios.get(url, {
+                params: {
+                    'idRol': this.fillEditarRol.idRol
+                }
+            }).then(response => { 
                 this.Permisos = response.data
                 this.filterPermisosByRol();
             })
+        },
+        getRoles(){
+          this.fullscreenLoading = true;
+          var url = '/administracion/rol/getRoles';
+          axios.get(url, {
+            params: {
+              'idRol': this.fillEditarRol.idRol
+            }
+          }).then(response => {
+            this.fillEditarRol.nombre = response.data[0].name;
+            this.fillEditarRol.slug = response.data[0].slug;
+            this.fullscreenLoading = false;
+          })
         },
         filterPermisosByRol(){
             let me = this;
@@ -181,43 +200,49 @@ export default {
                     'id': x.id,
                     'name': x.name,
                     'slug': x.slug,
-                    'checked': false
+                    'checked': (x.checked == 1) ? true : false 
                 })
             });
         },
         limpiarBusqueda(){
-            this.fillCrearRol.nombre = '';
-            this.fillCrearRol.slug = '';
+            this.fillEditarRol.nombre = '';
+            this.fillEditarRol.slug = '';
         },
         abrirModal(){
             this.modalShow = !this.modalShow;
         },
-        setRegistrarRolPermisos(){
-            if(this.validarRegistrarRolPermisos()){
+        setEditarRolPermisos(){
+            if(this.validarEditarRolPermisos()){
                 this.modalShow = true;
                 return;
             }
             this.fullscreenLoading = true
 
-            let url = "/administracion/rol/setRegistrarRolPermisos";
+            let url = "/administracion/rol/setEditarRolPermisos";
 
             axios.post(url, {
-                    'nombre'  : this.fillCrearRol.nombre,
-                    'slug' : this.fillCrearRol.slug,
+                    'idRol': this.fillEditarRol.idRol,
+                    'nombre'  : this.fillEditarRol.nombre,
+                    'slug' : this.fillEditarRol.slug,
                     'PermisosFilter' : this.PermisosFilter
             }).then(response => {
                 this.fullscreenLoading = false
-                this.$router.push('/roles');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Se ha editado el rol correctamente.',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             });
         },
-        validarRegistrarRolPermisos(){
+        validarEditarRolPermisos(){
             this.error = 0;
             this.mensajeError = [];
 
-            if(!this.fillCrearRol.nombre){
+            if(!this.fillEditarRol.nombre){
                 this.mensajeError.push("El Nombre es un campo obligatorio.");
             }
-            if(!this.fillCrearRol.slug){
+            if(!this.fillEditarRol.slug){
                 this.mensajeError.push("La Url Amigable es un campo obligatorio.");
             }
 
@@ -236,8 +261,7 @@ export default {
             }
 
             return this.error;
-        },
-
+        }
     }
 }
 </script>

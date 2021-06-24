@@ -79,7 +79,7 @@
                             <td v-text="i.name"></td>
                             <td v-text="i.slug"></td>
                               <router-link class="btn btn-flat btn-primary btn-sm" :to="{name: 'usuario.ver', params: {id: i.id}}"><i class="fas fa-folder"> Ver</i></router-link>
-                              <router-link class="btn btn-flat btn-info btn-sm" :to="{name: 'usuario.editar', params: {id: i.id}}"><i class="fas fa-pencil-alt"> Editar</i></router-link>
+                              <router-link class="btn btn-flat btn-info btn-sm" :to="{name: 'rol.editar', params: {id: i.id}}"><i class="fas fa-pencil-alt"> Editar</i></router-link>
                           </tr>
                         </tbody>
                       </table>

@@ -21,6 +21,7 @@ Route::post('/administracion/usuario/setCambiarEstadoUsuario', 'AdmUsersControll
 Route::get('/administracion/rol/getRoles', 'AdmRolesController@getRoles');
 Route::get('/administracion/rol/getListarPermisosByRol', 'AdmRolesController@getListarPermisosByRol');
 Route::post('/administracion/rol/setRegistrarRolPermisos', 'AdmRolesController@setRegistrarRolPermisos');
+Route::post('/administracion/rol/setEditarRolPermisos', 'AdmRolesController@setEditarRolPermisos');
 
 
 Route::get('/{optional?}', function () {
