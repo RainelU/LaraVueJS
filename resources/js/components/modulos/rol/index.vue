@@ -72,6 +72,7 @@
                           <tr>
                             <th>Nombre</th>
                             <th>Url Amigable</th>
+                            <th>Acciones</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -325,8 +326,5 @@ export default {
 </script>
 
 <style>
-    .ScrollTable{
-      max-height: 400px !important;
-      overflow: auto !important;
-    }
+    
 </style>

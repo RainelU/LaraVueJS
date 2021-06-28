@@ -20,4 +20,8 @@
 .ScrollTable{
     max-height: 400px !important;
     overflow: auto !important;
-  }
+}
+
+.li-img-bandeja{
+    list-style: none;
+}

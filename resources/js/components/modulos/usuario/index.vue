@@ -104,13 +104,13 @@
                         <tbody>
                           <tr v-for="(i, index) in listarUsuariosPaginated" :key="index">
                             <td v-if="!i.profile_image">
-                              <li class="li-img-bandeja">
-                                <img src="/img/avatar.png" class="img img-bandeja" alt="">
+                              <li class="li-img-bandeja" >
+                                <img src="/img/avatar.png" class="profile-user-img img-fluid img-max-height" alt="">
                               </li>
                             </td>
                             <td v-else>
                               <li class="li-img-bandeja">
-                                <img :src="i.profile_image" class="img img-bandeja" alt="">
+                                <img :src="i.profile_image" class="profile-user-img img-fluid img-max-height" alt="">
                               </li>
                             </td>
                             <td v-text="i.firstname"></td>

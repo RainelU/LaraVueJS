@@ -10,7 +10,9 @@ export default new VueRouter({
         {path: '/reportes/pedido', component: require('./components/modulos/reporte/index').default},
         {path: '/categoria', component: require('./components/modulos/categoria/index').default},
         {path: '/cliente', component: require('./components/modulos/cliente/index').default},
+
         {path: '/permiso', component: require('./components/modulos/permiso/index').default},
+        {path: '/permiso/crear', component: require('./components/modulos/permiso/create').default},
 
         {path: '/usuario', component: require('./components/modulos/usuario/index').default},
         {path: '/usuario/crear', component: require('./components/modulos/usuario/create').default},
